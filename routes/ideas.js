@@ -4,39 +4,6 @@ const router = express.Router();
 //the moudle - Idea.js
 const Idea = require('../models/Idea');
 
-// const ideas = [
-//   {
-//     id: 1,
-//     text: 'Creating a Smart Home Automation System',
-//     tag: 'technology',
-//     username: 'Shish',
-//   },
-//   {
-//     id: 2,
-//     text: 'Exploring Sustainable Energy Solutions',
-//     tag: 'environment',
-//     username: 'EcoEnthusiast',
-//   },
-//   {
-//     id: 3,
-//     text: 'Developing an Educational App for Kids',
-//     tag: 'education',
-//     username: 'EduTechMaster',
-//   },
-//   {
-//     id: 4,
-//     text: 'Designing a Community Garden Project',
-//     tag: 'community',
-//     username: 'GreenThumb',
-//   },
-//   {
-//     id: 5,
-//     text: 'Building a Social Networking Platform for Gamers',
-//     tag: 'gaming',
-//     username: 'GameMaster',
-//   },
-// ];
-
 //get all ideas
 router.get('/', async (req, res) => {
   try {
@@ -82,17 +49,28 @@ router.post('/', async (req, res) => {
 //update idea
 router.put('/:id', async (req, res) => {
   try {
-    const updatedIdea = await Idea.findByIdAndUpdate(
-      req.params.id,
-      {
-        $set: {
-          text: req.body.text,
-          tag: req.body.tag,
+    const idea = await Idea.findById(req.params.id);
+
+    //match username to idea:
+    if (idea.username === req.body.username) {
+      const updatedIdea = await Idea.findByIdAndUpdate(
+        req.params.id,
+        {
+          $set: {
+            text: req.body.text,
+            tag: req.body.tag,
+          },
         },
-      },
-      { new: true }
-    );
-    res.json({ success: true, data: updatedIdea });
+        { new: true }
+      );
+      return res.json({ success: true, data: updatedIdea });
+    }
+
+    // Username do not match
+    res.status(403).json({
+      success: false,
+      error: 'you are not authorized to update this',
+    });
   } catch (error) {
     console.log(error);
     res.status(500).json({ success: false, error: 'somthing went wrong' });
@@ -102,11 +80,19 @@ router.put('/:id', async (req, res) => {
 //del idea
 router.delete('/:id', async (req, res) => {
   try {
-    await Idea.findByIdAndDelete(req.params.id);
-    res.json({
-      success: true,
-      data: {},
-    });
+    const idea = await Idea.findById(req.params.id);
+    //match username to idea:
+    if (idea.username === req.body.username) {
+      await Idea.findByIdAndDelete(req.params.id);
+      return res.json({
+        success: true,
+        data: {},
+      });
+    }
+    //if not match
+    res
+      .status(403)
+      .json({ success: false, error: 'you are not authorized to delete this' });
   } catch (error) {
     console.log(error);
     res.status(500).json({ success: false, error: 'somthing went wrong' });

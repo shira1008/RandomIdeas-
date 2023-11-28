@@ -15,7 +15,7 @@ The Random Idea App is a full-stack web application where users can submit, view
   - CSS
   - JavaScript
 
-## Features for the server side
+## Features 
 
 - View all ideas submitted by users.
 - View a single idea by its unique identifier.

@@ -9,6 +9,9 @@
   },
   "author": "Shira",
   "license": "MIT",
+  "engines": {
+    "node": "20.9.0"
+  },
   "dependencies": {
     "clear-module": "^4.1.2",
     "cors": "^2.8.5",

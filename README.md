@@ -30,3 +30,5 @@ Example using Postman:
    - **URL:** `http://localhost:5000/ideas/{idea_id}`
    - **Body:** JSON with updated fields (text, tag, username).
 
+The app:
+https://randomideas-app-q7db.onrender.com/

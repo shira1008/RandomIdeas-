@@ -30,5 +30,16 @@ Example using Postman:
    - **URL:** `http://localhost:5000/ideas/{idea_id}`
    - **Body:** JSON with updated fields (text, tag, username).
 
+## Screenshots
+- Before adding the idea:
+![Screenshot 2024-02-15 120539](https://github.com/shira1008/RandomIdeas-/assets/109962964/9f8f07fe-ea9c-4b0b-8367-ba91405db742)
+
+- Minimal register to add an idea, and adding the idea
+  ![Screenshot 2024-02-15 120551](https://github.com/shira1008/RandomIdeas-/assets/109962964/1ff8dfdb-cd40-45df-b9b6-ff915a853495)
+
+- The idea was added to the DB and the UI. only the one who is register can delete the Idea.
+![Screenshot 2024-02-15 120624](https://github.com/shira1008/RandomIdeas-/assets/109962964/fe15c850-2a4d-4a05-885b-a8972ab836b1)
+
+
 The app:
 https://randomideas-app-q7db.onrender.com/
